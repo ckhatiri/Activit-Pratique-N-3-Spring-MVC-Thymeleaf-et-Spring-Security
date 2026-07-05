@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+    <title>Formulaire produit</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h2 class="mb-4" th:text="${product.id} == null ? 'Ajouter un produit' : 'Modifier le produit'"></h2>
+
+    <!-- Le jeton CSRF est ajouté automatiquement par thymeleaf-extras-springsecurity5
+         dès qu'on utilise th:action sur un formulaire -->
+    <form th:action="@{/admin/saveProduct}" th:object="${product}" method="post" class="row g-3">
+
+        <!-- N'inclure le champ id que s'il existe déjà (édition) : poster une chaîne vide
+             pour un Long ferait échouer la conversion et bloquerait tout le formulaire -->
+        <input type="hidden" th:field="*{id}" th:if="${product.id != null}">
+
+        <div class="col-md-6">
+            <label class="form-label">Nom du produit</label>
+            <input type="text" th:field="*{name}" class="form-control">
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Prix (DH)</label>
+            <input type="number" step="0.01" th:field="*{price}" class="form-control">
+            <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Quantité</label>
+            <input type="number" th:field="*{quantity}" class="form-control">
+            <div class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+        </div>
+
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a th:href="@{/user/products}" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

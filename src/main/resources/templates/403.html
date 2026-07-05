@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template}">
+<head>
+    <title>Accès refusé</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="alert alert-danger mt-4">
+        <h4>Accès refusé</h4>
+        <p>Vous n'avez pas les droits nécessaires pour accéder à cette page.</p>
+        <a th:href="@{/user/products}" class="btn btn-primary">Retour à la liste des produits</a>
+    </div>
+</div>
+</body>
+</html>
