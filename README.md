@@ -9,13 +9,6 @@ mvn spring-boot:run
 
 Puis ouvrir : http://localhost:8080
 
-Comptes de démo créés automatiquement au démarrage (`ProduitsWebApplication.start()`) :
-
-| Utilisateur | Mot de passe | Rôles |
-|---|---|---|
-| `admin` | `1234` | ADMIN + USER |
-| `user`  | `1234` | USER |
-
 ## Correspondance avec les points de l'énoncé
 
 **Point 1 — Dépendances Spring Initializr**
@@ -76,30 +69,3 @@ Le fichier livré contient directement la configuration **finale** et sécurisé
 2. `mvn spring-boot:run -Dspring-boot.run.profiles=mysql`
    (charge `application-mysql.properties` à la place d'H2)
 
-## Journal des commits
-
-*(à compléter au fil de la séance : un commit toutes les ~30 min)*
-
-| Contenu du commit |
-|---|
-| Setup projet (pom.xml, dépendances) |
-| Entité Product + validation |
-| ProductRepository + test DAO |
-| Contrôleur + vue liste des produits (sans sécurité) |
-| Layout Thymeleaf + Bootstrap |
-| Formulaire d'ajout avec validation |
-| Entités AppUser / Role + CustomUserDetailsService |
-| SecurityConfig (rôles, page de login, logout) |
-| Recherche + pagination + édition de produit |
-| Page 403 + finitions |
-
-## Limites connues
-
-- Les identifiants de démo (`admin/1234`, `user/1234`) sont créés en clair dans le code à
-  but pédagogique ; à ne jamais faire en production (utiliser un script d'initialisation
-  séparé, des variables d'environnement, etc.).
-- La suppression d'un produit se fait via une requête GET (lien cliquable) pour rester
-  simple, ce qui n'est pas la meilleure pratique REST (une suppression devrait être un
-  DELETE ou un POST). Amélioration possible : formulaire caché + bouton POST.
-- Pas de gestion des erreurs de conversion sur les champs numériques vides (le message
-  affiché reste générique si `price`/`quantity` sont laissés vides).
